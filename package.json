@@ -1,6 +1,6 @@
 {
   "name": "express-gateway-prometheus-metrics-example",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "An example plugin to expose custom prometheus metrics on an endpoint",
   "main": "index.js",
   "scripts": {
