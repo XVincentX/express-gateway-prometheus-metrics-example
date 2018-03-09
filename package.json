@@ -1,0 +1,34 @@
+{
+  "name": "express-gateway-prometheus-metrics-example",
+  "version": "1.0.0",
+  "description": "An example plugin to expose custom prometheus metrics on an endpoint",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:gateway": "node ./gateway/gateway.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XVincentX/express-gateway-prometheus-metrics-example.git"
+  },
+  "keywords": [
+    "express-gateway",
+    "prometheus",
+    "plugins"
+  ],
+  "author": "Vincenzo Chianese <vincenz.chianese@icloud.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/XVincentX/express-gateway-prometheus-metrics-example/issues"
+  },
+  "files": [
+    "index.js"
+  ],
+  "homepage": "https://github.com/XVincentX/express-gateway-prometheus-metrics-example#readme",
+  "devDependencies": {
+    "express-gateway": "^1.7.2"
+  },
+  "dependencies": {
+    "prom-client": "^10.2.3"
+  }
+}

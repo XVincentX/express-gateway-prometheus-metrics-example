@@ -1,0 +1,23 @@
+http:
+  port: 8080
+admin:
+  port: 9876
+apiEndpoints:
+  api:
+    host: '*'
+serviceEndpoints:
+  httpbin:
+    url: 'http://httpbin.org'
+policies:
+  - proxy
+  - metrics
+pipelines:
+  - name: basic
+    apiEndpoints:
+      - api
+    policies:
+      - metrics:
+      - proxy:
+          - action:
+              serviceEndpoint: httpbin
+              changeOrigin: true
