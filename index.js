@@ -3,7 +3,7 @@ const metrics = require('prom-client');
 const statusCodeCounter = new metrics.Counter({
   name: 'status_codes',
   help: 'status_code_counter',
-  labelNames: ['type', 'status_code', 'consumer']
+  labelNames: ['type', 'status_code', 'consumer', 'apiendpoint']
 });
 
 const plugin = {
@@ -44,13 +44,15 @@ const plugin = {
       },
       name: 'metrics',
       policy: ({ consumerIdHeaderName }) => (req, res, next) => {
+        const apiEndpoint = req.egContext.apiEndpoint.apiEndpointName;
+        const consumerHeader = req.header(consumerIdHeaderName) || 'anonymous';
+
         res.once('finish', () => {
-          if (res.statusCode >= 200 && res.statusCode < 300) {
-            statusCodeCounter.labels('SUCCESS', res.statusCode.toString(), req.header(consumerIdHeaderName) || 'anonymous').inc();
-          } else {
-            statusCodeCounter.labels('FAILED', res.statusCode.toString(), req.header(consumerIdHeaderName) || 'anonymous').inc();
-          }
+          const statusCode = res.statusCode.toString();
+          const responseType = res.statusCode >= 200 && res.statusCode < 300 ? 'SUCCESS' : 'FAILED';
+          statusCodeCounter.labels(responseType, statusCode, consumerHeader, apiEndpoint).inc();
         });
+
         next();
       }
     });
