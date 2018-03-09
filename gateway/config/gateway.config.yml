@@ -7,7 +7,7 @@ apiEndpoints:
     host: '*'
 serviceEndpoints:
   httpbin:
-    url: 'http://httpbin.org'
+    url: 'http://localhost:8081'
 policies:
   - proxy
   - metrics
