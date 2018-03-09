@@ -10,7 +10,7 @@ const plugin = {
   version: '1.0.0',
   policies: ['metrics'],
   schema: {
-    $id: 'http://express-gateway.io/policies/metrics-plugin.json',
+    $id: 'http://express-gateway.io/plugins/metrics.json',
     type: 'object',
     properties: {
       endpointName: {
@@ -33,7 +33,7 @@ const plugin = {
 
     pluginContext.registerPolicy({
       schema: {
-        $id: 'http://express-gateway.io/policies/metrics-policy.json',
+        $id: 'http://express-gateway.io/policies/metrics.json',
         type: 'object',
         properties: {
           consumerIdHeaderName: {
@@ -44,10 +44,9 @@ const plugin = {
       },
       name: 'metrics',
       policy: ({ consumerIdHeaderName }) => (req, res, next) => {
-        const apiEndpoint = req.egContext.apiEndpoint.apiEndpointName;
-        const consumerHeader = req.header(consumerIdHeaderName) || 'anonymous';
-
         res.once('finish', () => {
+          const apiEndpoint = req.egContext.apiEndpoint.apiEndpointName;
+          const consumerHeader = req.header(consumerIdHeaderName) || 'anonymous';
           const statusCode = res.statusCode.toString();
           const responseType = res.statusCode >= 200 && res.statusCode < 300 ? 'SUCCESS' : 'FAILED';
           statusCodeCounter.labels(responseType, statusCode, consumerHeader, apiEndpoint).inc();
