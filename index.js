@@ -40,7 +40,7 @@ const plugin = {
             type: 'string',
             default: 'eg-consumer-id'
           }
-        }
+        }, required: ['consumerIdHeaderName']
       },
       name: 'metrics',
       policy: ({ consumerIdHeaderName }) => (req, res, next) => {
