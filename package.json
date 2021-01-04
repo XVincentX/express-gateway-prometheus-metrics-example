@@ -26,7 +26,7 @@
   ],
   "homepage": "https://github.com/XVincentX/express-gateway-prometheus-metrics-example#readme",
   "devDependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "express-gateway": "^1.7.2",
     "jest": "^22.4.2"
   },
